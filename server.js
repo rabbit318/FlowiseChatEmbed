@@ -146,6 +146,8 @@ app.use(
   }),
 );
 
+// PING: this is the main page that the user sees
+// you may consider changing here for your own needs
 app.get('/', (_, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });

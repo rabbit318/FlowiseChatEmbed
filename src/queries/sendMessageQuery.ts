@@ -1,6 +1,7 @@
 import { FileUpload, IAction } from '@/components/Bot';
 import { sendRequest } from '@/utils/index';
 
+// PING: this is an important file that guides you how to communicate with the Flowise API when developing your own use cases
 export type IncomingInput = {
   question: string;
   uploads?: FileUpload[];
@@ -75,6 +76,8 @@ export const updateFeedbackQuery = ({ id, apiHost = 'http://localhost:3000', bod
     onRequest: onRequest,
   });
 
+// PING: this is the main query that sends messages to the Flowise API?
+// PING: I still think this is the most relevant one.
 export const sendMessageQuery = ({ chatflowid, apiHost = 'http://localhost:3000', body, onRequest }: MessageRequest) =>
   sendRequest<any>({
     method: 'POST',

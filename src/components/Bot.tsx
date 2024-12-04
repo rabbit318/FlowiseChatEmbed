@@ -1,3 +1,4 @@
+// PING: THIS IS AN IMPORTANT FILE OF WHAT BOTS LOOK LIKE
 import { createSignal, createEffect, For, onMount, Show, mergeProps, on, createMemo } from 'solid-js';
 import { v4 as uuidv4 } from 'uuid';
 import {
@@ -722,6 +723,7 @@ export const Bot = (botProps: BotProps & { class?: string }) => {
     return uploads;
   };
 
+  // PING: THE MOST IMPORTANT FUNCTION
   // Handle form submission
   const handleSubmit = async (value: string, action?: IAction | undefined | null) => {
     if (value.trim() === '') {
@@ -771,6 +773,7 @@ export const Bot = (botProps: BotProps & { class?: string }) => {
 
     if (action) body.action = action;
 
+    // PING: THIS "IF...ELSE" BLOCK IS THE MOST IMPORTANT ONE
     if (isChatFlowAvailableToStream()) {
       fetchResponseFromEventStream(props.chatflowid, body);
     } else {
@@ -1588,6 +1591,7 @@ export const Bot = (botProps: BotProps & { class?: string }) => {
                 )}
               </>
             ) : (
+              // PING: THIS IS WHERE THE MOST IMPORTANT COMPONENT - TEXTINPUT IS CALLED
               <TextInput
                 backgroundColor={props.textInput?.backgroundColor}
                 textColor={props.textInput?.textColor}

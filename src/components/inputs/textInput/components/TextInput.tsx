@@ -37,6 +37,7 @@ const defaultTextColor = '#303235';
 // CDN link for default send sound
 const defaultSendSound = 'https://cdn.jsdelivr.net/gh/FlowiseAI/FlowiseChatEmbed@latest/src/assets/send_message.mp3';
 
+// PING: THIS IS THE MOST IMPORTANT COMPONENT
 export const TextInput = (props: TextInputProps) => {
   const [isSendButtonDisabled, setIsSendButtonDisabled] = createSignal(false);
   const [warningMessage, setWarningMessage] = createSignal('');
@@ -45,6 +46,7 @@ export const TextInput = (props: TextInputProps) => {
   let fileUploadRef: HTMLInputElement | HTMLTextAreaElement | undefined;
   let imgUploadRef: HTMLInputElement | HTMLTextAreaElement | undefined;
   let audioRef: HTMLAudioElement | undefined;
+
 
   const handleInput = (inputValue: string) => {
     const wordCount = inputValue.length;
@@ -62,6 +64,7 @@ export const TextInput = (props: TextInputProps) => {
 
   const checkIfInputIsValid = () => warningMessage() === '' && inputRef?.reportValidity();
 
+  // PING: IMPORTANT FUNCTION
   const submit = () => {
     if (checkIfInputIsValid()) {
       if (props.enableInputHistory) {
@@ -82,6 +85,7 @@ export const TextInput = (props: TextInputProps) => {
     if (fileUploadRef) fileUploadRef.click();
   };
 
+  // PING: IMPORTANT FUNCTION
   const handleKeyDown = (e: KeyboardEvent) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       const isIMEComposition = e.isComposing || e.keyCode === 229;
@@ -146,6 +150,7 @@ export const TextInput = (props: TextInputProps) => {
         'background-color': props.backgroundColor ?? defaultBackgroundColor,
         color: props.textColor ?? defaultTextColor,
       }}
+      // PING: end point: when the user presses a key, this function is called
       onKeyDown={handleKeyDown}
     >
       <Show when={warningMessage() !== ''}>

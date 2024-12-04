@@ -59,6 +59,7 @@ export const Full = (props: FullProps, { element }: { element: HTMLElement }) =>
             overflow: 'hidden', // Ensure no extra scrolling due to content overflow
           }}
         >
+          {/* PING: THIS IS HOW BOT IS USED IN THE FULL PAGE */}
           <Bot
             badgeBackgroundColor={props.theme?.chatWindow?.backgroundColor}
             bubbleBackgroundColor={props.theme?.button?.backgroundColor ?? defaultButtonColor}
