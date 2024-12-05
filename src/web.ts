@@ -1,3 +1,5 @@
+// PING: WEB.JS ENTRY POINT; THIS IS THE FILE WHERE WEB.JS IS BUILT FROM
+
 import { registerWebComponents } from './register';
 import { parseChatbot, injectChatbotInWindow } from './window';
 

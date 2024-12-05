@@ -11,6 +11,9 @@ type BotProps = {
 export declare const initFull: (props: BotProps & {
     id?: string;
 }) => void;
+export declare const initExpertPage: (props: BotProps & {
+    id?: string;
+}) => void;
 export declare const init: (props: BotProps) => void;
 export declare const destroy: () => void;
 type Chatbot = {
@@ -19,6 +22,9 @@ type Chatbot = {
     destroy: typeof destroy;
 };
 export declare const parseChatbot: () => {
+    initExpertPage: (props: BotProps & {
+        id?: string;
+    }) => void;
     initFull: (props: BotProps & {
         id?: string;
     }) => void;

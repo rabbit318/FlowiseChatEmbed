@@ -1,4 +1,14 @@
 declare const chatbot: {
+    initExpertPage: (props: {
+        chatflowid: string;
+        apiHost?: string | undefined;
+        onRequest?: ((request: RequestInit) => Promise<void>) | undefined;
+        chatflowConfig?: Record<string, unknown> | undefined;
+        observersConfig?: import("./components/Bot").observersConfigType | undefined;
+        theme?: import("./features/bubble/types").BubbleTheme | undefined;
+    } & {
+        id?: string | undefined;
+    }) => void;
     initFull: (props: {
         chatflowid: string;
         apiHost?: string | undefined;

@@ -8,6 +8,7 @@ import { RecordAudioButton } from '@/components/buttons/RecordAudioButton';
 import { AttachmentUploadButton } from '@/components/buttons/AttachmentUploadButton';
 import { ChatInputHistory } from '@/utils/chatInputHistory';
 
+// PING: SEARCH BY <BOT>; THIS IS HOW BOT IS USED IN THE FULL PAGE
 type TextInputProps = {
   placeholder?: string;
   backgroundColor?: string;

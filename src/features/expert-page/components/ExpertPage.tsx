@@ -1,5 +1,5 @@
 import styles from '../../../assets/index.css';
-import { Bot, BotProps } from '@/components/Bot';
+import { ExpertBot, BotProps } from '@/components/ExpertBot';
 import { BubbleParams } from '@/features/bubble/types';
 import { createSignal, onCleanup, onMount, Show } from 'solid-js';
 
@@ -8,8 +8,7 @@ const defaultIconColor = 'white';
 
 export type FullProps = BotProps & BubbleParams;
 
-// PING: IMPORTANT FULL PAGE COMPONENT; THIS IS A SOLIDJS COMPONENT
-export const Full = (props: FullProps, { element }: { element: HTMLElement }) => {
+export const ExpertPage = (props: FullProps, { element }: { element: HTMLElement }) => {
   const [isBotDisplayed, setIsBotDisplayed] = createSignal(false);
 
   const launchBot = () => {
@@ -60,7 +59,7 @@ export const Full = (props: FullProps, { element }: { element: HTMLElement }) =>
             overflow: 'hidden', // Ensure no extra scrolling due to content overflow
           }}
         >
-          <Bot
+          <ExpertBot
             badgeBackgroundColor={props.theme?.chatWindow?.backgroundColor}
             bubbleBackgroundColor={props.theme?.button?.backgroundColor ?? defaultButtonColor}
             bubbleTextColor={props.theme?.button?.iconColor ?? defaultIconColor}

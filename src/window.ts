@@ -13,12 +13,23 @@ type BotProps = {
 
 let elementUsed: Element | undefined;
 
+// PING: WINDOW LEVEL; IMPORTANT!
 export const initFull = (props: BotProps & { id?: string }) => {
   destroy();
+  // PING: THIS IS WHERE THE FULL COMPONENT IS INSTANTIATED
   const fullElement = props.id ? document.getElementById(props.id) : document.querySelector('flowise-fullchatbot');
   if (!fullElement) throw new Error('<flowise-fullchatbot> element not found.');
   Object.assign(fullElement, props);
   elementUsed = fullElement;
+};
+
+export const initExpertPage = (props: BotProps & { id?: string }) => {
+  destroy();
+  // PING: THIS IS WHERE THE FULL COMPONENT IS INSTANTIATED
+  const expertPageElement = props.id ? document.getElementById(props.id) : document.querySelector('flowise-expertpage');
+  if (!expertPageElement) throw new Error('<flowise-expertpage> element not found.');
+  Object.assign(expertPageElement, props);
+  elementUsed = expertPageElement;
 };
 
 export const init = (props: BotProps) => {
@@ -46,6 +57,7 @@ declare const window:
   | undefined;
 
 export const parseChatbot = () => ({
+  initExpertPage,
   initFull,
   init,
   destroy,

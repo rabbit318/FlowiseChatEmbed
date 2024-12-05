@@ -1,4 +1,5 @@
 // PING: THIS IS AN IMPORTANT FILE OF WHAT BOTS LOOK LIKE
+// PING: TODO: SEEMS THAT THERE IS A FONT PROBLEM. The FONT look too fine, and I want it to be thicker
 import { createSignal, createEffect, For, onMount, Show, mergeProps, on, createMemo } from 'solid-js';
 import { v4 as uuidv4 } from 'uuid';
 import {
@@ -248,7 +249,7 @@ const defaultBackgroundColor = '#ffffff';
 const defaultTextColor = '#303235';
 
 // PING: THIS IS THE MOST IMPORTANT TOPCOMPONENT
-export const Bot = (botProps: BotProps & { class?: string }) => {
+export const ExpertBot = (botProps: BotProps & { class?: string }) => {
   // set a default value for showTitle if not set and merge with other props
   const props = mergeProps({ showTitle: true }, botProps);
   let chatContainer: HTMLDivElement | undefined;
