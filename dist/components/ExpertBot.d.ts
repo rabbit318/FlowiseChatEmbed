@@ -68,7 +68,7 @@ export type MessageType = {
 };
 type observerConfigType = (accessor: string | boolean | object | MessageType[]) => void;
 export type observersConfigType = Record<'observeUserInput' | 'observeLoading' | 'observeMessages', observerConfigType>;
-export type BotProps = {
+export type ExpertBotProps = {
     chatflowid: string;
     apiHost?: string;
     onRequest?: (request: RequestInit) => Promise<void>;
@@ -109,7 +109,7 @@ export type LeadsConfig = {
     phone?: boolean;
     successMessage?: string;
 };
-export declare const ExpertBot: (botProps: BotProps & {
+export declare const ExpertBot: (expertBotProps: ExpertBotProps & {
     class?: string;
 }) => import("solid-js").JSX.Element;
 export {};

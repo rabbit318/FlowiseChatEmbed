@@ -9,6 +9,7 @@ export const registerWebComponents = () => {
   // @ts-expect-error element incorect type
   customElement('flowise-fullchatbot', defaultBotProps, Full);
   customElement('flowise-chatbot', defaultBotProps, Bubble);
+  // PING: TODO: SEEMS TO BE SOME PROBLEM WITH THE EXPERT PAGE DEFINITION AND REGISTRATION. CHECK LATER.
   customElement('flowise-expertpage', defaultBotProps, ExpertPage);
 };
 
