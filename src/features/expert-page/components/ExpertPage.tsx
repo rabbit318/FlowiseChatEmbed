@@ -9,7 +9,8 @@ const defaultIconColor = 'white';
 
 export type ExpertPageProps = ExpertBotProps & BubbleParams;
 
-export const ExpertPage: Component<ExpertPageProps> = (props, { element }) => {
+//export const ExpertPage: Component<ExpertPageProps> = (props, { element }) 
+export const ExpertPage = (props: ExpertPageProps, { element }: { element: HTMLElement })=> {
   const [isBotDisplayed, setIsBotDisplayed] = createSignal(false);
 
   const launchBot = () => {
@@ -79,7 +80,7 @@ export const ExpertPage: Component<ExpertPageProps> = (props, { element }) => {
               </p>
             </div>
           </div> */}
-                    <div style={{ flex: 1, backgroundColor: '#ffffff' }}>
+            <div style={{ flex: 1, "background-color": '#ffffff' }}>
             {/* Right half content goes here */}
             <ExpertBot
               badgeBackgroundColor={props.theme?.chatWindow?.backgroundColor}
@@ -120,7 +121,7 @@ export const ExpertPage: Component<ExpertPageProps> = (props, { element }) => {
               "background-color": "#3B81F6"
             }} 
           />
-          <div style={{ flex: 1, backgroundColor: '#ffffff' }}>
+          <div style={{ flex: 1, "background-color": '#ffffff' }}>
             {/* Right half content goes here */}
             <ExpertBot
               badgeBackgroundColor={props.theme?.chatWindow?.backgroundColor}
