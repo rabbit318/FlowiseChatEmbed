@@ -1,5 +1,6 @@
 import styles from '../../../assets/index.css';
 import { ExpertBot, ExpertBotProps } from '@/components/ExpertBot';
+import { ContextBot, ContextBotProps } from '@/components/ContextBot';
 import { BubbleParams } from '@/features/bubble/types';
 import { createSignal, onCleanup, onMount, Show } from 'solid-js';
 import { Component } from 'solid-js';
@@ -82,7 +83,7 @@ export const ExpertPage = (props: ExpertPageProps, { element }: { element: HTMLE
           </div> */}
             <div style={{ flex: 1, "background-color": '#ffffff' }}>
             {/* Right half content goes here */}
-            <ExpertBot
+            <ContextBot
               badgeBackgroundColor={props.theme?.chatWindow?.backgroundColor}
               bubbleBackgroundColor={props.theme?.button?.backgroundColor ?? defaultButtonColor}
               bubbleTextColor={props.theme?.button?.iconColor ?? defaultIconColor}
