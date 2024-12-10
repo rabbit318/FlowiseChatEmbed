@@ -6,6 +6,13 @@ import { SaveLeadButton } from '@/components/buttons/LeadCaptureButtons';
 import { Avatar } from '@/components/avatars/Avatar';
 import { getLocalStorageChatflow, setLocalStorageChatflow } from '@/utils';
 
+// PING: THIS IS THE LEAD CAPTURE BUBBLE; 
+/*
+  In this context, "leads" refers to potential customers or contacts who have interacted with a chatbot or chat interface. 
+  Lead API allows tracking and managing these contacts, storing their basic information (name, email, phone) along with details about their chat interaction (chatflow ID, chat session ID):
+  https://docs.flowiseai.com/api-reference/leads
+  It's commonly used in sales and marketing to track potential customers who engage with automated chat systems.
+*/
 type Props = {
   message: MessageType;
   chatflowid: string;

@@ -1,6 +1,7 @@
 // PING: THIS IS AN IMPORTANT FILE OF WHAT BOTS LOOK LIKE
 import { createSignal, createEffect, For, onMount, Show, mergeProps, on, createMemo } from 'solid-js';
 import { v4 as uuidv4 } from 'uuid';
+// PING: TODO: READING TASK - HOW THESE SENDMESSAGEQUERY FUNCTIONS ARE USED
 import {
   sendMessageQuery,
   upsertVectorStoreWithFormData,
@@ -259,6 +260,7 @@ export const Bot = (botProps: BotProps & { class?: string }) => {
   const [loading, setLoading] = createSignal(false);
   const [sourcePopupOpen, setSourcePopupOpen] = createSignal(false);
   const [sourcePopupSrc, setSourcePopupSrc] = createSignal({});
+  // PING: IS THIS WHERE THE MESSAGES COMING FROM?
   const [messages, setMessages] = createSignal<MessageType[]>(
     [
       {
@@ -696,7 +698,7 @@ export const Bot = (botProps: BotProps & { class?: string }) => {
           formData.append('files', file.file);
         }
         formData.append('chatId', chatId());
-
+        // PING: This is the only function in this files that talks about upserting vector store  
         const response = await upsertVectorStoreWithFormData({
           chatflowid: props.chatflowid,
           apiHost: props.apiHost,
@@ -1359,6 +1361,7 @@ export const Bot = (botProps: BotProps & { class?: string }) => {
     }
   };
 
+  // PING: THIS IS THE FINAL RENDERING OF THE BOT
   return (
     <>
       <div
@@ -1433,6 +1436,10 @@ export const Bot = (botProps: BotProps & { class?: string }) => {
           >
             <For each={[...messages()]}>
               {(message, index) => {
+                // PING: FOR EACH MESSAGE!!! <For></For>
+                // PING: HostBubble is the speech bubble that shows the API responded messages and source context, or we could say the bot's messages  
+                // PING: GuestBubble is the speech bubble that shows the user's messages
+                // PING: SendButton should be the button that sends the user's message to the API
                 return (
                   <>
                     {message.type === 'userMessage' && (

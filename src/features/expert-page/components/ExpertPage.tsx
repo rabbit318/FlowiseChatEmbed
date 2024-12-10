@@ -50,7 +50,7 @@ export const ExpertPage: Component<ExpertPageProps> = (props, { element }) => {
       <style>{styles}</style>
       <Show when={isBotDisplayed()}>
         <div style={{ display: 'flex', height: '100vh', width: '100%' }}>
-          <div 
+          {/* <div 
             style={{ 
               flex: 1, 
               backgroundColor: '#f0f0f0',
@@ -78,6 +78,39 @@ export const ExpertPage: Component<ExpertPageProps> = (props, { element }) => {
                 This is the left side of the page.
               </p>
             </div>
+          </div> */}
+                    <div style={{ flex: 1, backgroundColor: '#ffffff' }}>
+            {/* Right half content goes here */}
+            <ExpertBot
+              badgeBackgroundColor={props.theme?.chatWindow?.backgroundColor}
+              bubbleBackgroundColor={props.theme?.button?.backgroundColor ?? defaultButtonColor}
+              bubbleTextColor={props.theme?.button?.iconColor ?? defaultIconColor}
+              showTitle={props.theme?.chatWindow?.showTitle}
+              showAgentMessages={props.theme?.chatWindow?.showAgentMessages}
+              title={props.theme?.chatWindow?.title}
+              titleAvatarSrc={props.theme?.chatWindow?.titleAvatarSrc}
+              welcomeMessage={props.theme?.chatWindow?.welcomeMessage}
+              errorMessage={props.theme?.chatWindow?.errorMessage}
+              poweredByTextColor={props.theme?.chatWindow?.poweredByTextColor}
+              textInput={props.theme?.chatWindow?.textInput}
+              botMessage={props.theme?.chatWindow?.botMessage}
+              userMessage={props.theme?.chatWindow?.userMessage}
+              feedback={props.theme?.chatWindow?.feedback}
+              fontSize={props.theme?.chatWindow?.fontSize}
+              footer={props.theme?.chatWindow?.footer}
+              starterPrompts={props.theme?.chatWindow?.starterPrompts}
+              chatflowid={props.chatflowid}
+              chatflowConfig={props.chatflowConfig}
+              apiHost={props.apiHost}
+              onRequest={props.onRequest}
+              isFullPage={true}
+              observersConfig={props.observersConfig}
+              starterPromptFontSize={props.theme?.chatWindow?.starterPromptFontSize}
+              clearChatOnReload={props.theme?.chatWindow?.clearChatOnReload}
+              disclaimer={props.theme?.disclaimer}
+              dateTimeToggle={props.theme?.chatWindow?.dateTimeToggle}
+              renderHTML={props.theme?.chatWindow?.renderHTML}
+            />
           </div>
           <div 
             style={{ 
