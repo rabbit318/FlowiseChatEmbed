@@ -83,5 +83,26 @@ export declare const addLeadQuery: ({ apiHost, body, onRequest }: LeadCaptureReq
     data?: any;
     error?: Error | undefined;
 }>;
+export type DocumentStoreStatus = 'EMPTY' | 'SYNC' | 'SYNCING' | 'STALE' | 'NEW' | 'UPSERTING' | 'UPSERTED';
+export type DocumentStore = {
+    id: string;
+    name: string;
+    description: string;
+    loaders: string;
+    whereUsed: string;
+    status: DocumentStoreStatus;
+    vectorStoreConfig: string;
+    embeddingConfig: string;
+    recordManagerConfig: string;
+    createdDate: string;
+    updatedDate: string;
+};
+export type GetDocumentStoreRequest = BaseRequest & {
+    id: string;
+};
+export declare const getDocumentStoreQuery: ({ id, apiHost, onRequest }: GetDocumentStoreRequest) => Promise<{
+    data?: DocumentStore | undefined;
+    error?: Error | undefined;
+}>;
 export {};
 //# sourceMappingURL=sendMessageQuery.d.ts.map

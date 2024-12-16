@@ -270,12 +270,16 @@ export const ExpertBot = (expertBotProps: ExpertBotProps & { class?: string }) =
     { equals: false },
   );
 
+  // PING: A SET OF THINGS THAT WE CAN ACTIVELY CHANGE HERE FOR DISPLAYING COMPONENTS
+  // PING: E.G. SET TO TRUE FOR CHATFEEDBACKSTATUS OR FULLFILEUPLOAD
   const [isChatFlowAvailableToStream, setIsChatFlowAvailableToStream] = createSignal(false);
   const [chatId, setChatId] = createSignal('');
   const [isMessageStopping, setIsMessageStopping] = createSignal(false);
   const [starterPrompts, setStarterPrompts] = createSignal<string[]>([], { equals: false });
-  const [chatFeedbackStatus, setChatFeedbackStatus] = createSignal<boolean>(false);
-  const [fullFileUpload, setFullFileUpload] = createSignal<boolean>(false);
+  // const [chatFeedbackStatus, setChatFeedbackStatus] = createSignal<boolean>(false);
+  // const [fullFileUpload, setFullFileUpload] = createSignal<boolean>(false);
+  const [chatFeedbackStatus, setChatFeedbackStatus] = createSignal<boolean>(true);
+  const [fullFileUpload, setFullFileUpload] = createSignal<boolean>(true);
   const [uploadsConfig, setUploadsConfig] = createSignal<UploadsConfig>();
   const [leadsConfig, setLeadsConfig] = createSignal<LeadsConfig>();
   const [isLeadSaved, setIsLeadSaved] = createSignal(false);
@@ -545,6 +549,7 @@ export const ExpertBot = (expertBotProps: ExpertBotProps & { class?: string }) =
     const chatId = params.chatId;
     const input = params.question;
     params.streaming = true;
+    console.log("ExportBot: fetching response from event stream");
     fetchEventSource(`${props.apiHost}/api/v1/prediction/${chatflowid}`, {
       openWhenHidden: true,
       method: 'POST',

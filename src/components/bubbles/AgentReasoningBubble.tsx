@@ -33,6 +33,7 @@ export const AgentReasoningBubble = (props: Props) => {
     }
   });
 
+  // PING: TODO: files here
   const agentReasoningArtifacts = (artifacts: FileUpload[]) => {
     const newArtifacts = cloneDeep(artifacts);
     for (let i = 0; i < newArtifacts.length; i++) {

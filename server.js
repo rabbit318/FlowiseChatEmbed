@@ -236,7 +236,8 @@ const validateApiKey = (req, res, next) => {
 };
 
 app.use(validateApiKey);
-
+ // PING: GET-UPLOAD-FILE COULD POTENTIALLY BE MODIFIED FOR FILE LOAD AND ARTIFACTS RENDERING PURPOSES
+ // PING: IS RETRIEVING NECESSARY IN MY USE CASE?
 const proxyEndpoints = {
   prediction: {
     method: 'POST',

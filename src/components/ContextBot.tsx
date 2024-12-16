@@ -10,6 +10,7 @@ import {
   getChatbotConfig,
   FeedbackRatingType,
   createAttachmentWithFormData,
+  getDocumentStoreQuery
 } from '@/queries/sendMessageQuery';
 import { TextInput } from './inputs/textInput';
 import { GuestBubble } from './bubbles/GuestBubble';
@@ -270,6 +271,8 @@ export const ContextBot = (contextBotProps: ContextBotProps & { class?: string }
     { equals: false },
   );
 
+  // PING: A SET OF THINGS THAT WE CAN ACTIVELY CHANGE HERE FOR DISPLAYING COMPONENTS
+  // PING: E.G. SET TO TRUE FOR CHATFEEDBACKSTATUS
   const [isChatFlowAvailableToStream, setIsChatFlowAvailableToStream] = createSignal(false);
   const [chatId, setChatId] = createSignal('');
   const [isMessageStopping, setIsMessageStopping] = createSignal(false);
@@ -545,6 +548,7 @@ export const ContextBot = (contextBotProps: ContextBotProps & { class?: string }
     const chatId = params.chatId;
     const input = params.question;
     params.streaming = true;
+    console.log("ContextBot: fetching response from event stream");
     // TODO: call retrieve api
     fetchEventSource(`${props.apiHost}/api/v1/prediction/${chatflowid}`, {
       openWhenHidden: true,
@@ -779,6 +783,24 @@ export const ContextBot = (contextBotProps: ContextBotProps & { class?: string }
     // PING: THIS "IF...ELSE" BLOCK IS THE MOST IMPORTANT ONE
     if (isChatFlowAvailableToStream()) {
       fetchResponseFromEventStream(props.chatflowid, body);
+      // PING: TEST DOCUMENT STORE QUERY HERE
+      // How to use the function
+      console.log("TESTING DOCUMENT STORE QUERY");
+      const response = await getDocumentStoreQuery({
+        id: "2dd17b5c-7f39-4184-8a7e-82fe65dcced7/b7d186c7-d2ef-4c3c-8b68-7c06b2c58cc3",
+        apiHost: props.apiHost,
+        onRequest: async (request) => {
+          // Optional request interceptor
+        }
+      });
+
+      // Access the response data
+      const documentStore = response.data;
+      if(documentStore){
+        console.log("documentStore returned: ");
+        console.log(documentStore.name);
+        console.log(documentStore.status);
+      }
     } else {
       const result = await sendMessageQuery({
         chatflowid: props.chatflowid,

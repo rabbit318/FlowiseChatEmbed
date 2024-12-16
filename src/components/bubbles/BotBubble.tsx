@@ -245,6 +245,8 @@ export const BotBubble = (props: Props) => {
     }
   });
 
+  // PING: TODO: NOW THE ARTIFACTS ARE ONLY LIMITED TO THE USER UPLOADED FILE. WHAT IF I WANT SOMETHING ELSE? SAY FILE THAT IS ALREADY IN THE DB
+  // PING: AND DIFFERENT FORMAT, LIKE TEXT, IMAGE, VIDEO, CODE, 3D, FLOWCHART...
   const renderArtifacts = (item: Partial<FileUpload>) => {
     return (
       <>
