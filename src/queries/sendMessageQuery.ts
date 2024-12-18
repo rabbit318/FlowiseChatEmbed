@@ -260,3 +260,78 @@ export const getDocumentStoreQuery = ({
     url: `${apiHost}/api/v1/document-store/store/${id}`,
     onRequest: onRequest,
   });
+
+  // Get chunks from a specific document loader
+  // Flowise API page: https://docs.flowiseai.com/api-reference/document-store
+
+// 1. Define Types
+// Types for the response data structure
+export type DocumentStoreFileChunk = {
+  id: string;
+  docId: string;
+  storeId: string;
+  chunkNo: number;
+  pageContent: string;
+  metadata: string;
+};
+
+export type DocumentFile = {
+  id: string;
+  name: string;
+  mimePrefix: string;
+  size: number;
+  status: 'EMPTY' | string; // Add other status types if needed
+  uploaded: string;
+};
+
+export type DocumentStoreLoaderForPreview = {
+  id: string;
+  loaderId: string;
+  loaderName: string;
+  splitterId: string;
+  splitterName: string;
+  totalChunks: number;
+  totalChars: number;
+  status: 'EMPTY' | string;
+  storeId: string;
+  files: DocumentFile[];
+  source: string;
+  credential: string;
+  rehydrated: boolean;
+  preview: boolean;
+  previewChunkCount: number;
+};
+
+export type GetDocumentChunksResponse = {
+  chunks: DocumentStoreFileChunk[];
+  count: number;
+  file: DocumentStoreLoaderForPreview;
+  currentPage: number;
+  storeName: string;
+  description: string;
+};
+
+// 2. Request type
+export type GetDocumentChunksRequest = BaseRequest & {
+  storeId: string;
+  loaderId: string;
+  pageNo: string;
+};
+
+// 3. Query function
+export const getDocumentChunksQuery = ({ 
+  storeId,
+  loaderId,
+  pageNo,
+  apiHost = 'http://localhost:3000',
+  onRequest 
+}: GetDocumentChunksRequest) =>
+  sendRequest<GetDocumentChunksResponse>({
+    method: 'GET',
+    url: `${apiHost}/api/v1/document-store/chunks/${storeId}/${loaderId}/${pageNo}`,
+    headers: {
+      'Authorization': 'Bearer Ae_EknUFZUuhvY0X8yNp--5vsZsiOCMW8KZ-0r2xK3M',
+      'Content-Type': 'application/json'
+    },
+    onRequest: onRequest,
+  });

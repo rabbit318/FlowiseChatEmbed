@@ -10,7 +10,8 @@ import {
   getChatbotConfig,
   FeedbackRatingType,
   createAttachmentWithFormData,
-  getDocumentStoreQuery
+  getDocumentStoreQuery,
+  getDocumentChunksQuery,
 } from '@/queries/sendMessageQuery';
 import { TextInput } from './inputs/textInput';
 import { GuestBubble } from './bubbles/GuestBubble';
@@ -248,6 +249,7 @@ const defaultWelcomeMessage = 'Hi there! How can I help?';
 
 const defaultBackgroundColor = '#ffffff';
 const defaultTextColor = '#303235';
+// const FLOWISE_API_KEY = process.env.FLOWISE_API_KEY;
 
 // PING: THIS IS THE MOST IMPORTANT TOPCOMPONENT
 export const ContextBot = (contextBotProps: ContextBotProps & { class?: string }) => {
@@ -783,23 +785,72 @@ export const ContextBot = (contextBotProps: ContextBotProps & { class?: string }
     // PING: THIS "IF...ELSE" BLOCK IS THE MOST IMPORTANT ONE
     if (isChatFlowAvailableToStream()) {
       fetchResponseFromEventStream(props.chatflowid, body);
+
       // PING: TEST DOCUMENT STORE QUERY HERE
       // How to use the function
+      // PING: TODO: THE DOCUMENT STORE ID and the Flowise API Key are hardcoded here.
+      // PING: TODO: We need to make it dynamic for any client side queries
       console.log("TESTING DOCUMENT STORE QUERY");
       const response = await getDocumentStoreQuery({
-        id: "2dd17b5c-7f39-4184-8a7e-82fe65dcced7/b7d186c7-d2ef-4c3c-8b68-7c06b2c58cc3",
+        id: "2dd17b5c-7f39-4184-8a7e-82fe65dcced7",
         apiHost: props.apiHost,
         onRequest: async (request) => {
-          // Optional request interceptor
+          // Add authorization header
+          request.headers = {
+            ...request.headers,
+            // "Authorization": `Bearer ${FLOWISE_API_KEY}` // Add your JWT token here
+            "Authorization": `Bearer Ae_EknUFZUuhvY0X8yNp--5vsZsiOCMW8KZ-0r2xK3M` // Add your JWT token here
+          };
+          
+          // If props.onRequest exists, call it too
+          if (props.onRequest) {
+            await props.onRequest(request);
+          }
         }
       });
 
-      // Access the response data
-      const documentStore = response.data;
-      if(documentStore){
+      if (response.data) {
         console.log("documentStore returned: ");
-        console.log(documentStore.name);
-        console.log(documentStore.status);
+        console.log(response.data);
+        console.log(response.data.name);
+        console.log(response.data.status);
+      }
+
+
+      // PING: TEST DOCUMENT STORE GET CHUNKS QUERY HERE
+      console.log("TESTING DOCUMENT CHUNKS QUERY");
+      const chunkResponse = await getDocumentChunksQuery({
+        storeId: "2dd17b5c-7f39-4184-8a7e-82fe65dcced7",
+        loaderId: "b7d186c7-d2ef-4c3c-8b68-7c06b2c58cc3",
+        pageNo: "1",
+        apiHost: props.apiHost,
+        onRequest: async (request) => {
+          // Log the full request URL and headers
+          console.log("Document Chunks Request URL:", 
+            `${props.apiHost}/api/v1/document-store/chunks/2dd17b5c-7f39-4184-8a7e-82fe65dcced7/b7d186c7-d2ef-4c3c-8b68-7c06b2c58cc3/1`
+          );
+          console.log("Request Headers:", request.headers);
+          
+          // Add authorization header
+          request.headers = {
+            ...request.headers,
+            'Authorization': 'Bearer Ae_EknUFZUuhvY0X8yNp--5vsZsiOCMW8KZ-0r2xK3M',
+            'Content-Type': 'application/json'
+          };
+    
+          if (props.onRequest) {
+            await props.onRequest(request);
+          }
+        }
+      });
+    
+
+      if (chunkResponse.data) {
+        console.log("Document Chunks Response:");
+        console.log("- Chunks:", chunkResponse.data.chunks);
+        console.log("- Total count:", chunkResponse.data.count);
+        console.log("- Store name:", chunkResponse.data.storeName);
+        console.log("- Current page:", chunkResponse.data.currentPage);
       }
     } else {
       const result = await sendMessageQuery({
