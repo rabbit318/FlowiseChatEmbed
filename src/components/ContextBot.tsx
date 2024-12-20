@@ -345,6 +345,7 @@ export const ContextBot = (contextBotProps: ContextBotProps & { class?: string }
   /**
    * Add each chat message into localStorage
    */
+  // PING: THE CHAT MESSAGE IS SAVED IN LOCAL STORAGE?
   const addChatMessage = (allMessage: MessageType[]) => {
     const messages = allMessage.map((item) => {
       if (item.fileUploads) {
@@ -790,31 +791,31 @@ export const ContextBot = (contextBotProps: ContextBotProps & { class?: string }
       // How to use the function
       // PING: TODO: THE DOCUMENT STORE ID and the Flowise API Key are hardcoded here.
       // PING: TODO: We need to make it dynamic for any client side queries
-      console.log("TESTING DOCUMENT STORE QUERY");
-      const response = await getDocumentStoreQuery({
-        id: "2dd17b5c-7f39-4184-8a7e-82fe65dcced7",
-        apiHost: props.apiHost,
-        onRequest: async (request) => {
-          // Add authorization header
-          request.headers = {
-            ...request.headers,
-            // "Authorization": `Bearer ${FLOWISE_API_KEY}` // Add your JWT token here
-            "Authorization": `Bearer Ae_EknUFZUuhvY0X8yNp--5vsZsiOCMW8KZ-0r2xK3M` // Add your JWT token here
-          };
+      // console.log("TESTING DOCUMENT STORE QUERY");
+      // const response = await getDocumentStoreQuery({
+      //   id: "2dd17b5c-7f39-4184-8a7e-82fe65dcced7",
+      //   apiHost: props.apiHost,
+      //   onRequest: async (request) => {
+      //     // Add authorization header
+      //     request.headers = {
+      //       ...request.headers,
+      //       // "Authorization": `Bearer ${FLOWISE_API_KEY}` // Add your JWT token here
+      //       "Authorization": `Bearer Ae_EknUFZUuhvY0X8yNp--5vsZsiOCMW8KZ-0r2xK3M` // Add your JWT token here
+      //     };
           
-          // If props.onRequest exists, call it too
-          if (props.onRequest) {
-            await props.onRequest(request);
-          }
-        }
-      });
+      //     // If props.onRequest exists, call it too
+      //     if (props.onRequest) {
+      //       await props.onRequest(request);
+      //     }
+      //   }
+      // });
 
-      if (response.data) {
-        console.log("documentStore returned: ");
-        console.log(response.data);
-        console.log(response.data.name);
-        console.log(response.data.status);
-      }
+      // if (response.data) {
+      //   console.log("documentStore returned: ");
+      //   console.log(response.data);
+      //   console.log(response.data.name);
+      //   console.log(response.data.status);
+      // }
 
 
       // PING: TEST DOCUMENT STORE GET CHUNKS QUERY HERE
@@ -1432,6 +1433,66 @@ export const ContextBot = (contextBotProps: ContextBotProps & { class?: string }
     } else {
       return <FilePreview disabled={getInputDisabled()} item={item} onDelete={() => handleDeletePreview(item)} />;
     }
+  };
+
+  // PING: TEST THE DOCUMENT CHUNKS RETURN AS SOURCE BUBBLE
+  const fetchDocumentChunks = async () => {
+    try {
+      const chunkResponse = await getDocumentChunksQuery({
+        storeId: "2dd17b5c-7f39-4184-8a7e-82fe65dcced7",
+        loaderId: "b7d186c7-d2ef-4c3c-8b68-7c06b2c58cc3",
+        pageNo: "1",
+        apiHost: props.apiHost,
+        onRequest: async (request) => {
+          request.headers = {
+            ...request.headers,
+            'Authorization': 'Bearer Ae_EknUFZUuhvY0X8yNp--5vsZsiOCMW8KZ-0r2xK3M',
+            'Content-Type': 'application/json'
+          };
+          if (props.onRequest) {
+            await props.onRequest(request);
+          }
+        }
+      });
+
+      if (chunkResponse.data?.chunks) {
+        setMessages([{ 
+          message: '', 
+          type: 'apiMessage',
+          dateTime: new Date().toISOString(),
+          sourceDocuments: chunkResponse.data.chunks.map((chunk, index) => ({
+            pageContent: formatChunkContent(chunk.pageContent),
+            metadata: {}
+          }))
+        }]);
+      }
+    } catch (error) {
+      console.error('Error fetching document chunks:', error);
+    }
+  };
+
+  // Call this on component mount
+  onMount(() => {
+    fetchDocumentChunks();
+  });
+
+  // Helper function to format chunk content
+  const formatChunkContent = (content: string) => {
+    return content
+      // Add paragraphs
+      .split('\n').filter(line => line.trim())
+      .map(para => `<p>${para}</p>`)
+      .join('')
+      // Add spacing between sections
+      .replace(/\.\s+/g, '.</p><p>')
+      // Optionally add headers for sections
+      .replace(/^(Chapter|Section)\s+\d+/gm, match => `<h3>${match}</h3>`)
+      // Clean up any double spaces
+      .replace(/\s\s+/g, ' ')
+      // Optionally add bullet points
+      .replace(/•/g, '<br>•')
+      // Add any other formatting you need
+      ;
   };
 
   return (
