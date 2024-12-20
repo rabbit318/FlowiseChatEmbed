@@ -104,5 +104,55 @@ export declare const getDocumentStoreQuery: ({ id, apiHost, onRequest }: GetDocu
     data?: DocumentStore | undefined;
     error?: Error | undefined;
 }>;
+export type DocumentStoreFileChunk = {
+    id: string;
+    docId: string;
+    storeId: string;
+    chunkNo: number;
+    pageContent: string;
+    metadata: string;
+};
+export type DocumentFile = {
+    id: string;
+    name: string;
+    mimePrefix: string;
+    size: number;
+    status: 'EMPTY' | string;
+    uploaded: string;
+};
+export type DocumentStoreLoaderForPreview = {
+    id: string;
+    loaderId: string;
+    loaderName: string;
+    splitterId: string;
+    splitterName: string;
+    totalChunks: number;
+    totalChars: number;
+    status: 'EMPTY' | string;
+    storeId: string;
+    files: DocumentFile[];
+    source: string;
+    credential: string;
+    rehydrated: boolean;
+    preview: boolean;
+    previewChunkCount: number;
+};
+export type GetDocumentChunksResponse = {
+    chunks: DocumentStoreFileChunk[];
+    count: number;
+    file: DocumentStoreLoaderForPreview;
+    currentPage: number;
+    storeName: string;
+    description: string;
+};
+export type GetDocumentChunksRequest = BaseRequest & {
+    storeId: string;
+    loaderId: string;
+    pageNo: string;
+};
+export declare const getDocumentChunksQuery: ({ storeId, loaderId, pageNo, apiHost, onRequest }: GetDocumentChunksRequest) => Promise<{
+    data?: GetDocumentChunksResponse | undefined;
+    error?: Error | undefined;
+}>;
 export {};
 //# sourceMappingURL=sendMessageQuery.d.ts.map

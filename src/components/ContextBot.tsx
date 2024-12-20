@@ -16,6 +16,7 @@ import {
 import { TextInput } from './inputs/textInput';
 import { GuestBubble } from './bubbles/GuestBubble';
 import { BotBubble } from './bubbles/BotBubble';
+import { DocumentBubble } from './bubbles/DocumentBubble';
 import { LoadingBubble } from './bubbles/LoadingBubble';
 import { StarterPromptBubble } from './bubbles/StarterPromptBubble';
 import {
@@ -73,7 +74,7 @@ type FilePreview = {
   type: string;
 };
 
-type messageType = 'apiMessage' | 'userMessage' | 'usermessagewaiting' | 'leadCaptureMessage';
+type messageType = 'apiMessage' | 'userMessage' | 'usermessagewaiting' | 'leadCaptureMessage' | 'documentMessage';
 
 export type IAgentReasoning = {
   agentName?: string;
@@ -115,6 +116,7 @@ export type MessageType = {
   id?: string;
   followUpPrompts?: string;
   dateTime?: string;
+  chunks?: any[];
 };
 
 type IUploads = {
@@ -1458,12 +1460,9 @@ export const ContextBot = (contextBotProps: ContextBotProps & { class?: string }
       if (chunkResponse.data?.chunks) {
         setMessages([{ 
           message: '', 
-          type: 'apiMessage',
-          dateTime: new Date().toISOString(),
-          sourceDocuments: chunkResponse.data.chunks.map((chunk, index) => ({
-            pageContent: formatChunkContent(chunk.pageContent),
-            metadata: {}
-          }))
+          type: 'documentMessage',
+          chunks: chunkResponse.data.chunks,
+          dateTime: new Date().toISOString()
         }]);
       }
     } catch (error) {
@@ -1577,7 +1576,8 @@ export const ContextBot = (contextBotProps: ContextBotProps & { class?: string }
               minHeight: '0px',
             }}
           >
-            <For each={[...messages()]}>
+            {/* Original message rendering - commented out for now */}
+            {/* <For each={[...messages()]}>
               {(message, index) => {
                 return (
                   <>
@@ -1644,6 +1644,22 @@ export const ContextBot = (contextBotProps: ContextBotProps & { class?: string }
                   </>
                 );
               }}
+            </For> */}
+             {/* New Document-only rendering */}
+            <For each={[...messages()]}>
+              {(message) => (
+                <Show when={message.type === 'documentMessage'}>
+                  <DocumentBubble
+                    chunks={message.chunks}
+                    backgroundColor={props.botMessage?.backgroundColor}
+                    textColor={props.botMessage?.textColor}
+                    showAvatar={props.botMessage?.showAvatar}
+                    avatarSrc={props.botMessage?.avatarSrc}
+                    fontSize={props.fontSize}
+                    sourceDocsTitle="Document Content"
+                  />
+                </Show>
+              )}
             </For>
           </div>
           <Show when={messages().length === 1}>
