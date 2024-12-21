@@ -20,7 +20,15 @@
 <body>
     <div id="root"></div>
     <script type="module">
-        import Chatbot from 'http://localhost:5678/web.js'
+        // PING: LOCAL DEVELOPMENT ONLY
+        // import Chatbot from 'http://localhost:5678/web.js'
+
+        // PING:REMOVE DEV ENVIRONMENT ONLY
+        import Chatbot from 'https://flowise-chat-embed-pqwl-git-dev-rabbit318s-projects.vercel.app/web.js'
+
+
+        // PING: TODO UPDATE INFOPRODUCTION ONLY
+        //import Chatbot from 'https://flowise-embed.vercel.app/web.js'
         
         Chatbot.initExpertPage({
         //Chatbot.initFull({
