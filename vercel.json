@@ -18,10 +18,10 @@
     {
       "src": "/web.js",
       "headers": {
-        "cache-control": "public, max-age=31536000, immutable",
+        "content-type": "application/javascript",
         "access-control-allow-origin": "*"
       },
-      "dest": "/web.js"
+      "dest": "/dist/web.js"
     },
     {
       "src": "/",
