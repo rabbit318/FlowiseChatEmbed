@@ -7,13 +7,14 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "dev": "cross-env NODE_ENV=development rollup --watch --config rollup.config.js",
-    "build": "cross-env NODE_ENV=production rollup --config rollup.config.js",
+    "build": "rollup --config rollup.config.js && cp dist/web.js public/",
     "lint": "eslint \"src/**/*.ts*\"",
     "lint-fix": "eslint --fix \"src/**/*.ts*\"",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,md,mdx}\"",
     "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,md,mdx}\"",
     "prepare": "husky install",
-    "start": "node server.js"
+    "start": "node server.js",
+    "vercel-build": "yarn build"
   },
   "license": "MIT",
   "dependencies": {

@@ -6,12 +6,9 @@
       "use": "@vercel/node"
     },
     {
-      "src": "public/**",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "dist/**",
-      "use": "@vercel/static"
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": { "distDir": "dist" }
     }
   ],
   "routes": [
@@ -19,16 +16,17 @@
       "src": "/web.js",
       "headers": {
         "content-type": "application/javascript",
-        "access-control-allow-origin": "*"
+        "access-control-allow-origin": "*",
+        "cache-control": "public, max-age=0, must-revalidate"
       },
       "dest": "/dist/web.js"
     },
     {
-      "src": "/",
-      "dest": "/public/index.html"
+      "src": "/(.*)\\.d\\.ts$",
+      "dest": "/dist/$1.d.ts"
     },
     {
-      "src": "/index.html",
+      "src": "/",
       "dest": "/public/index.html"
     },
     {
