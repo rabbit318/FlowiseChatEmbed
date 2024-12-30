@@ -40,12 +40,16 @@
             // When API HOST is HF Space
             apiHost: 'https://pinka23-fractals-flow.hf.space',  // Updated to HF space format
             headers: {
+                // CORS headers
                 'Access-Control-Allow-Origin': '*',
                 'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
                 'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+                // Authentication headers
+                'Authorization': `Bearer ${process.env.HUGGINGFACE_TOKEN || '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'}`,
+                'Content-Type': 'application/json'
             },
             chatflowConfig: {
-                huggingfaceApiToken: 'hf_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+                huggingfaceApiToken: process.env.HUGGINGFACE_TOKEN || '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'
             },
             
             observersConfig: {
