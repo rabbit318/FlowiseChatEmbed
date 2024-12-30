@@ -33,8 +33,21 @@
         Chatbot.initExpertPage({
         //Chatbot.initFull({
             chatflowid: '3ddb560d-74dc-40da-8551-4e7521461a24',
-            apiHost: 'http://localhost:8080',
-            chatflowConfig: {},
+            // LOCAL DEVELOPMENT ONLY
+            // apiHost: 'http://localhost:8080',
+            // chatflowConfig: {},
+
+            // When API HOST is HF Space
+            apiHost: 'https://pinka23-fractals-flow.hf.space',  // Updated to HF space format
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+                'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+            },
+            chatflowConfig: {
+                huggingfaceApiToken: 'hf_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+            },
+            
             observersConfig: {
                 observeUserInput: (userInput) => {
                     console.log({ userInput });
