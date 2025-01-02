@@ -24,14 +24,21 @@
         // import Chatbot from 'http://localhost:5678/web.js'
 
         // PING:REMOVE DEV ENVIRONMENT ONLY
-        import Chatbot from 'https://flowise-chat-embed-pqwl-git-dev-rabbit318s-projects.vercel.app/dist/web.js'
+        //import Chatbot from 'https://flowise-chat-embed-pqwl-git-dev-rabbit318s-projects.vercel.app/dist/web.js'
         
+
         // PING: TRY TO USE RELATIVE PATH
         //import Chatbot from '../dist/web.js'
 
 
         // PING: TODO UPDATE INFOPRODUCTION ONLY
         //import Chatbot from 'https://flowise-embed.vercel.app/web.js'
+
+        // Get the current domain
+        const currentDomain = window.location.origin;
+        
+        // Use the same domain for web.js
+        import Chatbot from `${currentDomain}/dist/web.js`
         
         Chatbot.initExpertPage({
         //Chatbot.initFull({
