@@ -38,8 +38,9 @@
         const currentDomain = window.location.origin;
         
         // Use the same domain for web.js
-        import Chatbot from `${currentDomain}/dist/web.js`
-        
+        // import Chatbot from `${currentDomain}/dist/web.js`
+        const module = await import(`${currentDomain}/dist/web.js`);
+        const Chatbot = module.default;
         Chatbot.initExpertPage({
         //Chatbot.initFull({
             chatflowid: '3ddb560d-74dc-40da-8551-4e7521461a24',
