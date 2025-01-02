@@ -24,7 +24,7 @@
         // import Chatbot from 'http://localhost:5678/web.js'
 
         // PING:REMOVE DEV ENVIRONMENT ONLY
-        //import Chatbot from 'https://flowise-chat-embed-pqwl-git-dev-rabbit318s-projects.vercel.app/dist/web.js'
+        import Chatbot from 'https://flowise-chat-embed-git-dev-rabbit318s-projects.vercel.app/web.js'
         
 
         // PING: TRY TO USE RELATIVE PATH
@@ -39,8 +39,8 @@
         
         // Use the same domain for web.js
         // import Chatbot from `${currentDomain}/dist/web.js`
-        const module = await import(`${currentDomain}/dist/web.js`);
-        const Chatbot = module.default;
+        // const module = await import(`${currentDomain}/dist/web.js`);
+        // const Chatbot = module.default;
         Chatbot.initExpertPage({
         //Chatbot.initFull({
             chatflowid: '3ddb560d-74dc-40da-8551-4e7521461a24',
