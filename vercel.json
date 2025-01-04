@@ -17,7 +17,9 @@
       "headers": {
         "content-type": "application/javascript",
         "access-control-allow-origin": "*",
-        "cache-control": "public, max-age=0, must-revalidate"
+        "cache-control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+        "pragma": "no-cache",
+        "expires": "0"
       },
       "dest": "/dist/web.js"
     },
