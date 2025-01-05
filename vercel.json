@@ -13,7 +13,7 @@
   ],
   "routes": [
     {
-      "src": "/dist/web.js",
+      "src": "dist/web.js",
       "dest": "dist/web.js",
       "headers": {
         "content-type": "application/javascript",
