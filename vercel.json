@@ -13,8 +13,8 @@
   ],
   "routes": [
     {
-      "src": "/web.js",
-      "dest": "/web.js",
+      "src": "/dist/web.js",
+      "dest": "/dist/web.js",
       "headers": {
         "content-type": "application/javascript",
         "access-control-allow-origin": "*",
