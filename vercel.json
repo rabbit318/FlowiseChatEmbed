@@ -13,8 +13,8 @@
   ],
   "routes": [
     {
-      "src": "/dist/web.js",
-      "dest": "/dist/web.js",
+      "src": "/web.js",
+      "dest": "/web.js",
       "headers": {
         "content-type": "application/javascript",
         "access-control-allow-origin": "*",
@@ -22,10 +22,6 @@
         "pragma": "no-cache",
         "expires": "0"
       }
-    },
-    {
-      "src": "/(.*)\\.d\\.ts$",
-      "dest": "/dist/$1.d.ts"
     },
     {
       "src": "/",
