@@ -15,7 +15,7 @@
   "routes": [
     {
       "src": "/web.js",
-      "dest": "/server.js",
+      "dest": "/public/web.js",
       "headers": {
         "content-type": "application/javascript",
         "access-control-allow-origin": "*",
