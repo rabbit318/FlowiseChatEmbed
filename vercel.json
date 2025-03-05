@@ -25,13 +25,13 @@
   "headers": [
     {
       "source": "/web.js",
-      "headers": {
-        "content-type": "application/javascript",
-        "access-control-allow-origin": "*",
-        "cache-control": "no-store, no-cache, must-revalidate, proxy-revalidate",
-        "pragma": "no-cache",
-        "expires": "0"
-      }
+      "headers": [
+        { "key": "Content-Type", "value": "application/javascript" },
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Cache-Control", "value": "no-store, no-cache, must-revalidate, proxy-revalidate" },
+        { "key": "Pragma", "value": "no-cache" },
+        { "key": "Expires", "value": "0" }
+      ]
     },
     {
       "source": "/(.*)",
