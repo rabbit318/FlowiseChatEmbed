@@ -14,11 +14,19 @@
   ],
   "routes": [
     {
-      "handle": "filesystem"
+      "src": "/web.js",
+      "dest": "/public/web.js",
+      "headers": {
+        "content-type": "application/javascript",
+        "access-control-allow-origin": "*",
+        "cache-control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+        "pragma": "no-cache",
+        "expires": "0"
+      }
     },
     {
-      "src": "/web.js",
-      "dest": "/dist/web.js",
+      "src": "/dist/web.js",
+      "dest": "/public/dist/web.js",
       "headers": {
         "content-type": "application/javascript",
         "access-control-allow-origin": "*",
@@ -30,6 +38,13 @@
     {
       "src": "/",
       "dest": "/public/index.html"
+    },
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/server.js"
     }
   ],
   "headers": [
@@ -42,4 +57,4 @@
       ]
     }
   ]
-}
+} 
