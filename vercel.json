@@ -18,11 +18,17 @@
       "destination": "/dist/web.js"
     },
     {
-      "source": "/",
-      "destination": "/public/index.html"
+      "source": "/(.*)",
+      "destination": "/public/$1"
     }
   ],
   "headers": [
+    {
+      "source": "/index.html",
+      "headers": [
+        { "key": "Content-Type", "value": "text/html; charset=UTF-8" }
+      ]
+    },
     {
       "source": "/web.js",
       "headers": [
