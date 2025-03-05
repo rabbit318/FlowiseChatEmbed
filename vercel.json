@@ -15,7 +15,16 @@
   "rewrites": [
     {
       "source": "/web.js",
-      "destination": "/dist/web.js",
+      "destination": "/dist/web.js"
+    },
+    {
+      "source": "/",
+      "destination": "/public/index.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/web.js",
       "headers": {
         "content-type": "application/javascript",
         "access-control-allow-origin": "*",
@@ -24,12 +33,6 @@
         "expires": "0"
       }
     },
-    {
-      "source": "/",
-      "destination": "/public/index.html"
-    }
-  ],
-  "headers": [
     {
       "source": "/(.*)",
       "headers": [
