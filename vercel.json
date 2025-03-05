@@ -14,9 +14,6 @@
   ],
   "rewrites": [
     {
-      "handle": "filesystem"
-    },
-    {
       "src": "/web.js",
       "dest": "/dist/web.js",
       "headers": {
