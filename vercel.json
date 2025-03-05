@@ -40,7 +40,7 @@
       ]
     },
     {
-      "source": "/dist/**/*.d.ts",
+      "source": "/dist/(.*\\.d.ts)",
       "headers": [
         { "key": "Content-Type", "value": "text/plain" }
       ]
