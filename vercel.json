@@ -12,7 +12,7 @@
       "config": { "distDir": "dist" }
     }
   ],
-  "routes": [
+  "rewrites": [
     {
       "handle": "filesystem"
     },
