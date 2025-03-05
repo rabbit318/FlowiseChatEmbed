@@ -14,8 +14,8 @@
   ],
   "rewrites": [
     {
-      "src": "/web.js",
-      "dest": "/dist/web.js",
+      "source": "/web.js",
+      "destination": "/dist/web.js",
       "headers": {
         "content-type": "application/javascript",
         "access-control-allow-origin": "*",
@@ -25,8 +25,8 @@
       }
     },
     {
-      "src": "/",
-      "dest": "/public/index.html"
+      "source": "/",
+      "destination": "/public/index.html"
     }
   ],
   "headers": [
